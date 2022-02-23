@@ -1,0 +1,24 @@
+<div class="videos-container">
+  <div class="videos-wrapper">
+    <mat-progress-bar mode="query" *ngIf="!videos.length"></mat-progress-bar>
+    <div class="current-video" *ngIf="selectedVideo && videos.length">
+      <h2 [ngClass]="getTitleStyles()" class="video-title">{{searchTerm}}</h2>
+      <div class="iframe-wrapper">
+        <iframe [src]="videoSrc | safe" class="iframe"></iframe>
+      </div>
+      <mat-card>
+        <h3>
+          {{selectedVideo.snippet.title}}
+        </h3>
+        <p>{{selectedVideo.snippet.description}}</p>
+        <p [innerHTML]="utils.isPrime(searchTerm.length) ? '🙂' : '😔'"></p>
+      </mat-card>
+    </div>
+    <div class="videos-list">
+      <div *ngFor="let video of videos" class="video-item item" (click)="onSelectVideo(video)">
+        <img [src]="video.snippet.thumbnails.medium.url" [alt]="video.snippet.title" class="video-image">
+        <div mat-line>{{video.snippet.title}}</div>
+      </div>
+    </div>
+  </div>
+</div>

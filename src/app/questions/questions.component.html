@@ -1,0 +1,25 @@
+<div class="question-container">
+  <mat-card *ngIf="question">
+    <mat-card-title class="question-title">{{question.question}}</mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Select one option</mat-label>
+        <mat-select
+          [(ngModel)]="currQuestionTerm">
+          <mat-option class="example-radio-button" *ngFor="let answer of question.answers" [value]="answer">
+            {{answer}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="accent" (click)="saveAnswerTerm()" [disabled]="!currQuestionTerm">{{ questionNumber < 2 ? 'Next' : 'Submit'}}</button>
+    </mat-card-actions>
+
+    <mat-divider inset></mat-divider>
+
+    <mat-card-subtitle class="footer">{{ (questionNumber + 1) + ' out of 3'}}</mat-card-subtitle>
+  </mat-card>
+</div>
+
+<app-video [personalInfo]="personalInfo" *ngIf="!question"></app-video>
